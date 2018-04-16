@@ -26,4 +26,4 @@ jobs:
       #     key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: export TERM=xterm && export USER=node && /bin/runghostinspectorsuite server.js
+      - run: export TERM=dumb && export USER=node && /bin/runghostinspectorsuite server.js
