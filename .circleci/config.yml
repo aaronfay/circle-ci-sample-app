@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: ghost-inspector/test-runner-node
+      - image: ghostinspector/test-runner-node
 
     # working_directory: ~/repo
 
