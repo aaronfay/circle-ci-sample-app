@@ -49,7 +49,7 @@ jobs:
             echo "Polling for suite results (ID: $RESULT_ID)"
             while [ "$STATUS" = 'null' ]; do
               sleep 5
-              SUITE_RESULT=$(curl -s "https://api.ghostinspector.com/v1/suite-results/$RESULT_ID/?apiKey=$API_KEY")
+              SUITE_RESULT=$(curl -s "https://api.ghostinspector.com/v1/suite-results/$RESULT_ID/?apiKey=$GI_API_KEY")
               STATUS=$(echo $SUITE_RESULT | ./jq -r '.data.passing')
               echo " - status: $STATUS"
             done
