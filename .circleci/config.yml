@@ -28,7 +28,7 @@ jobs:
             sleep 3
             docker logs test-app
 
-            docker run -d \
+            docker run \
               -e APP_PORT=test-app:$APP_PORT \
               -e GI_API_KEY=$GI_API_KEY \
               -e GI_SUITE=$GI_SUITE \
@@ -36,5 +36,3 @@ jobs:
               --network temp-network \
               ghostinspector/test-runner-standalone
             
-            sleep 2
-            docker ps
