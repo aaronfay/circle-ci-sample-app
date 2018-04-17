@@ -1,29 +1,32 @@
-
 version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: ghostinspector/test-runner-node
-
-    # working_directory: ~/repo
-
+      - image: docker:17.05.0-ce-git
     steps:
+      # required to run multiple containers
+      - setup_remote_docker
+      # check out our code
       - checkout
 
-      # Download and cache dependencies
-      # - restore_cache:
-      #     keys:
-      #     - v1-dependencies-{{ checksum "package.json" }}
-      #     # fallback to using the latest cache if no exact match is found
-      #     - v1-dependencies-
+      - run:
+          name: Build my application
+          # build our app and call it 
+          command: |
+            docker build -t my-app:0.1.$CIRCLE_BUILD_NUM .
 
-      # - run: yarn install
-
-      # - save_cache:
-      #     paths:
-      #       - node_modules
-      #     key: v1-dependencies-{{ checksum "package.json" }}
-        
-      # run tests!
-      - run: export TERM=dumb && export USER=node && /bin/runghostinspectorsuite server.js
+      - run:
+          name: Execute test
+          command: |
+            docker network create temp-network
+            docker run -d \
+              --network temp-network \
+              --name my-app \
+              my-app:0.1.$CIRCLE_BUILD_NUM --sha=$CIRCLE_SHA1
+            docker run \
+              -e APP_PORT=my-app:$APP_PORT \
+              -e GI_API_KEY=$GI_API_KEY \
+              -e GI_SUITE=$GI_SUITE \
+              -e NGROK_TOKEN=$NGROK_TOKEN \
+              --network temp-network \
+              ghostinspector/test-runner-standalone
