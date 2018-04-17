@@ -18,21 +18,17 @@ jobs:
       - run:
           name: Execute test
           command: |
-            docker pull ghostinspector/test-runner-standalone
             docker network create temp-network
             docker run -d \
               --network temp-network \
-              --name test-app \
+              --name my-app \
               my-app:0.1.$CIRCLE_BUILD_NUM --sha=$CIRCLE_SHA1
 
-            sleep 3
-            docker logs test-app
-
             docker run \
-              -e APP_PORT=test-app:$APP_PORT \
+              -e APP_PORT=my-app:$APP_PORT \
               -e GI_API_KEY=$GI_API_KEY \
               -e GI_SUITE=$GI_SUITE \
               -e NGROK_TOKEN=$NGROK_TOKEN \
               --network temp-network \
-              ghostinspector/test-runner-standalone
+              ghostinspector/my-runner-standalone
             
