@@ -27,7 +27,7 @@ jobs:
 
             sleep 3
             docker logs test-app
-
+            docker ps
             docker run \
               -e APP_PORT=test-app:$APP_PORT \
               -e GI_API_KEY=$GI_API_KEY \
