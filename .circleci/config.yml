@@ -9,21 +9,8 @@ jobs:
 
       - run:
           name: Deploy to staging
-          command: which wget
+          command: pwd
 
-  test:
-    docker:
-      - image: docker:17.05.0-ce-git
-    steps:
-      - run:
-          name: Execute test
-          command: curl -s https://api.ghostinspector.com/v1/suites/$GI_SUITE/execute/?apiKey=$GI_API_KEY&startUrl=my-staging.site.comL&immediate=1
-
-workflows:
-  version: 2
-  main:
-    jobs:
-      - deploy
-      - test:
-          requires:
-            - deploy
+notify:
+  webhooks:
+    - url: https://api.ghostinspector.com/v1/suites/$GI_SUITE/execute/?apiKey=$GI_API_KEY&startUrl=my-staging.site.comL&immediate=1
