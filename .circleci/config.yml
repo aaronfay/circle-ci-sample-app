@@ -11,6 +11,6 @@ jobs:
           name: Deploy to staging
           command: pwd
 
-notify:
-  webhooks:
-    - url: https://api.ghostinspector.com/v1/suites/$GI_SUITE/execute/?apiKey=$GI_API_KEY&startUrl=my-staging.site.comL&immediate=1
+    notify:
+      webhooks:
+        - url: https://api.ghostinspector.com/v1/suites/$GI_SUITE/execute/?apiKey=$GI_API_KEY&startUrl=my-staging.site.comL&immediate=1
