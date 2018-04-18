@@ -9,7 +9,7 @@ jobs:
 
       - run:
           name: Deploy to staging
-          command: which curl
+          command: which wget
 
   test:
     docker:
