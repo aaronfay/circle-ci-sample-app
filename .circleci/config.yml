@@ -13,4 +13,4 @@ jobs:
 
 notify:
   webhooks:
-    - url: https://api.ghostinspector.com/v1/suites/5ad4fd966cca1a35967abcd1/execute/?apiKey=af923ddcd57dcaca093c7369f3768abf631bb379&startUrl=my-staging.site.comL&immediate=1
+    - url: https://api.ghostinspector.com/v1/suites/5ad4fd966cca1a35967abcd1/execute/?apiKey=<api_key>&startUrl=my-staging.site.comL&immediate=1
